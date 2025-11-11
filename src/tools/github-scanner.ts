@@ -116,7 +116,9 @@ export const githubScannerTool = createTool({
           headers: {
             'Authorization': `Bearer ${githubToken}`,
             'Accept': 'application/vnd.github+json',
-            'X-GitHub-Api-Version': '2022-11-28'
+            'X-GitHub-Api-Version': '2022-11-28',
+            'Host': 'api.github.com',
+            'User-Agent': 'ai-codereview'
           },
         },
       );
@@ -142,7 +144,9 @@ export const githubScannerTool = createTool({
           headers: {
             'Authorization': `Bearer ${githubToken}`,
             'Accept': 'application/vnd.github+json',
-            'X-GitHub-Api-Version': '2022-11-28'
+            'X-GitHub-Api-Version': '2022-11-28',
+            'Host': 'api.github.com',
+            'User-Agent': 'ai-codereview'
           },
         },
       );
