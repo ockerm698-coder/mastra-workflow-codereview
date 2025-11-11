@@ -114,8 +114,9 @@ export const githubScannerTool = createTool({
         `https://api.github.com/repos/${owner}/${repo}/git/trees/${sha}?recursive=1`,
         {
           headers: {
-            Authorization: `Bearer ${githubToken}`,
-            Accept: 'application/vnd.github.v3+json',
+            'Authorization': `Bearer ${githubToken}`,
+            'Accept': 'application/vnd.github+json',
+            'X-GitHub-Api-Version': '2022-11-28'
           },
         },
       );
@@ -138,8 +139,9 @@ export const githubScannerTool = createTool({
         `https://api.github.com/repos/${owner}/${repo}/contents/${path}?ref=${branch}`,
         {
           headers: {
-            Authorization: `Bearer ${githubToken}`,
-            Accept: 'application/vnd.github.v3+json',
+            'Authorization': `Bearer ${githubToken}`,
+            'Accept': 'application/vnd.github+json',
+            'X-GitHub-Api-Version': '2022-11-28'
           },
         },
       );
