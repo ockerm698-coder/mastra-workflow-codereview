@@ -114,14 +114,14 @@ export const githubScannerTool = createTool({
         `https://api.github.com/repos/${owner}/${repo}/git/trees/${sha}?recursive=1`,
         {
           headers: {
-            Authorization: `token ${githubToken}`,
+            Authorization: `Bearer ${githubToken}`,
             Accept: 'application/vnd.github.v3+json',
           },
         },
       );
 
       if (!response.ok) {
-        throw new Error(`Failed to fetch repository tree: ${response.statusText}`);
+        throw new Error(`Failed to fetch repository tree: ${response.status} ${response.ok} ${response.statusText}`);
       }
 
       return response.json();
