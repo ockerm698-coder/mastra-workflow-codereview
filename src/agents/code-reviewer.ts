@@ -46,7 +46,7 @@ export const codeReviewerAgent = new Agent({
    */
   instructions: `You are an expert code reviewer. Analyze code for:
 
-1. **Code Quality**: bugs, edge cases, error handling
+1. **Code Quality**: bugs, edge cases, error handling, grammatical error
 2. **Security**: SQL injection, XSS, hardcoded secrets
 3. **Performance**: inefficient algorithms, memory leaks
 4. **Best Practices**: naming, structure, maintainability
