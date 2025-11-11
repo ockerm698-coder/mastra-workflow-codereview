@@ -1,0 +1,32 @@
+{
+  "name": "mastra-workflow-codereview",
+  "version": "1.0.0",
+  "description": "AI-powered code review system using Mastra and Cloudflare Workers",
+  "main": "src/index.ts",
+  "type": "module",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "test": "vitest",
+    "type-check": "tsc --noEmit"
+  },
+  "keywords": [
+    "mastra",
+    "cloudflare-workers",
+    "code-review",
+    "ai"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@mastra/core": "^0.24.0",
+    "hono": "^4.0.0",
+    "zod": "^3.23.0"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^4.20241127.0",
+    "@types/node": "^20.0.0",
+    "typescript": "^5.3.0",
+    "wrangler": "^4.46.0"
+  }
+}
