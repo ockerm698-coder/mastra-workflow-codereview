@@ -5,3 +5,11 @@ compatibility_flags = ["nodejs_compat"]
 
 # 环境变量通过 wrangler secret 设置
 # wrangler secret put OPENAI_API_KEY
+
+# works日志跟踪
+[observability]
+[observability.logs]
+enabled = true
+head_sampling_rate = 1
+invocation_logs = true
+persist = true
