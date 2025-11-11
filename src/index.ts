@@ -169,6 +169,7 @@ app.post('/webhook/github', async (c) => {
             code: file.content,
             fileName: file.path,
           });
+          console.log(`${file.path} result: ${JSON.stringify(result)}`);
           return { success: true, ...result };
         } catch (error: any) {
           return {

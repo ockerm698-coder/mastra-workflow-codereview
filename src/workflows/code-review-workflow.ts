@@ -68,7 +68,7 @@ const staticAnalysisStep = createStep({
     const result = await staticAnalyzerTool.execute({
       context: inputData!,
     });
-  console.log('Run static code analysis. result: ', JSON.stringify(result));
+    console.log('Run static code analysis. result: ', JSON.stringify(result));
     // 返回结果，包含原始数据和分析结果
     return {
       code: inputData!.code,              // 保留原始代码
