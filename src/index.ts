@@ -159,6 +159,7 @@ app.post('/webhook/github', async (c) => {
     if (!workflow) {
       return c.json({ success: false, error: 'Workflow not found' }, 500);
     }
+    console.log('start code review workflow.');
 
     // 并行审查所有文件
     const results = await Promise.all(
