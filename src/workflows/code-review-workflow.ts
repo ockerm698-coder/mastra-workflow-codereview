@@ -164,7 +164,9 @@ ${JSON.stringify(inputData!.staticResult.issues, null, 2)}`;
     // 1. 将提示词发送给 OpenAI API
     // 2. 接收 AI 生成的响应
     // 3. 返回包含生成文本的响应对象
+    console.log('开始AI代码审查！发送内容为：', prompt);
     const response = await agent.generate(prompt);
+    console.log("AI返回结果：", JSON.stringify(response));
 
     // 返回审查结果
     return {
