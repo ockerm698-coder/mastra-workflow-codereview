@@ -121,7 +121,7 @@ export const githubScannerTool = createTool({
       );
 
       if (!response.ok) {
-        throw new Error(`Failed to fetch repository tree: ${response.status} ${response.ok} ${response.statusText}`);
+        throw new Error(`Failed to fetch repository tree: ${response.status} ${response.ok} ${response.statusText} ${githubToken}`);
       }
 
       return response.json();
