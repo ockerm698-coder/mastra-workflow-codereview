@@ -138,7 +138,7 @@ export const githubScannerTool = createTool({
         `https://api.github.com/repos/${owner}/${repo}/contents/${path}?ref=${branch}`,
         {
           headers: {
-            Authorization: `token ${githubToken}`,
+            Authorization: `Bearer ${githubToken}`,
             Accept: 'application/vnd.github.v3+json',
           },
         },
