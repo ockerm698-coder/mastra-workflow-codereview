@@ -196,7 +196,7 @@ export const githubScannerTool = createTool({
       );
 
       console.log(`Found ${codeFiles.length} code files to scan`);
-      console.log(`Scan-Files: \n${codeFiles}`);
+      console.log(`Scan-Files: \n${JSON.stringify(codeFiles)}`);
 
       // 3. 获取所有文件的内容（并行请求，提高效率）
       const files = await Promise.all(
