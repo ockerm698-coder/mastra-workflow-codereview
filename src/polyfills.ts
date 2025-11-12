@@ -6,6 +6,10 @@
  * 修复 Cloudflare Workers 环境中缺失的 Web API
  */
 
+console.log('🔧 Loading polyfills...');
+console.log('AbortSignal exists?', typeof AbortSignal !== 'undefined');
+console.log('AbortSignal.prototype.addEventListener exists?', typeof AbortSignal !== 'undefined' && typeof AbortSignal.prototype.addEventListener);
+
 /**
  * AbortSignal.addEventListener Polyfill
  *
@@ -15,20 +19,21 @@
 if (typeof AbortSignal !== 'undefined') {
   const originalAbortSignal = AbortSignal.prototype;
 
-  // 检查是否已经有 addEventListener
-  if (!originalAbortSignal.addEventListener) {
-    // 定义监听器函数类型
-    type ListenerFunction = (event: Event) => void;
+  // 无论是否存在都强制覆盖，因为 Workers 的实现可能有问题
+  console.log('Installing AbortSignal polyfill...');
 
-    // 为每个 AbortSignal 实例创建一个监听器集合
-    const listenersMap = new WeakMap<AbortSignal, Map<ListenerFunction, ListenerFunction>>();
+  // 定义监听器函数类型
+  type ListenerFunction = (event: Event) => void;
 
-    // 添加事件监听器
-    // @ts-ignore
-    AbortSignal.prototype.addEventListener = function(
-      type: string,
-      listener: ListenerFunction
-    ) {
+  // 为每个 AbortSignal 实例创建一个监听器集合
+  const listenersMap = new WeakMap<AbortSignal, Map<ListenerFunction, ListenerFunction>>();
+
+  // 添加事件监听器
+  // @ts-ignore
+  AbortSignal.prototype.addEventListener = function(
+    type: string,
+    listener: ListenerFunction
+  ) {
       if (type !== 'abort') return; // 只支持 abort 事件
 
       // 获取或创建监听器集合
@@ -66,30 +71,29 @@ if (typeof AbortSignal !== 'undefined') {
             wrappedFn.call(this, event);
           });
         }
-      };
     };
+  };
 
-    // 移除事件监听器
-    // @ts-ignore
-    AbortSignal.prototype.removeEventListener = function(
-      type: string,
-      listener: ListenerFunction
-    ) {
+  // 移除事件监听器
+  // @ts-ignore
+  AbortSignal.prototype.removeEventListener = function(
+    type: string,
+    listener: ListenerFunction
+  ) {
       if (type !== 'abort') return;
 
-      const listeners = listenersMap.get(this);
-      if (!listeners) return;
+    const listeners = listenersMap.get(this);
+    if (!listeners) return;
 
-      // 移除监听器
-      listeners.delete(listener);
+    // 移除监听器
+    listeners.delete(listener);
 
-      // 如果没有监听器了，清理
-      if (listeners.size === 0) {
-        listenersMap.delete(this);
-        this.onabort = null;
-      }
-    };
+    // 如果没有监听器了，清理
+    if (listeners.size === 0) {
+      listenersMap.delete(this);
+      this.onabort = null;
+    }
+  };
 
-    console.log('✅ AbortSignal.addEventListener polyfill installed');
-  }
+  console.log('✅ AbortSignal.addEventListener polyfill installed');
 }
