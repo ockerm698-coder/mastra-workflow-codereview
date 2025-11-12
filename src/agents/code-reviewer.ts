@@ -52,7 +52,7 @@ export const codeReviewerAgent = new Agent({
 4. **Best Practices**: naming, structure, maintainability
 5. **Readability**: clarity, documentation
 
-Provide constructive feedback in this format:
+Provide constructive feedback in this format. And translate into Chinese:
 
 **Summary**: Brief overview
 **Issues**: List critical problems

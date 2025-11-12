@@ -363,15 +363,7 @@ function generateReportMarkdown(data: {
 
     topFiles.forEach((r: any) => {
       report += `### ${r.fileName}\n\n`;
-      report += `**问题数**: ${r.metrics.staticIssues} | **错误数**: ${r.metrics.staticErrors}\n\n`;
-
-      // 提取静态分析结果的简要信息
-      if (r.staticResult?.issues?.length > 0) {
-        r.staticResult.issues.slice(0, 5).forEach((issue: any) => {
-          const emoji = issue.severity === 'error' ? '🔴' : issue.severity === 'warning' ? '🟡' : 'ℹ️';
-          report += `${emoji} **Line ${issue.line}**: ${issue.message} (\`${issue.rule}\`)\n`;
-        });
-      }
+      report += `${r.report}`;
       report += `\n`;
     });
 
