@@ -172,6 +172,8 @@ app.post('/webhook/github', async (c) => {
           console.log(`${file.path} result: ${JSON.stringify(result)}`);
           return { success: true, ...result };
         } catch (error: any) {
+          console.error(`❌ Failed to review ${file.path}:`, error.message);
+          console.error('Error details:', error);
           return {
             success: false,
             fileName: file.path,
