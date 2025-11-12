@@ -36,8 +36,8 @@ import { z } from 'zod';
 
 // 需要扫描的文件扩展名
 const CODE_EXTENSIONS = [
-  '.js', 'ts',
-  // '.jsx', '.tsx',
+  '.js',
+  // '.jsx', '.tsx', 'ts',
   // '.py', '.java', '.go', '.rs',
   // '.c', '.cpp', '.h', '.hpp',
   // '.rb', '.php', '.swift', '.kt',
