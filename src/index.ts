@@ -362,7 +362,6 @@ function generateReportMarkdown(data: {
       .filter((r: any) => r.metrics?.staticIssues > 0);
 
     topFiles.forEach((r: any) => {
-      report += `### ${r.fileName}\n\n`;
       report += `${r.report}`;
       report += `\n`;
     });

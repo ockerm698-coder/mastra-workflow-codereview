@@ -36,12 +36,11 @@ import { z } from 'zod';
 
 // 需要扫描的文件扩展名
 const CODE_EXTENSIONS = [
-  '.js', 
-  // '.jsx', '.ts', '.tsx',
-  // '.py', '.java', '.go', '.rs',
-  // '.c', '.cpp', '.h', '.hpp',
-  // '.rb', '.php', '.swift', '.kt',
-  // '.sh', '.bash', '.sql',
+  '.js', '.jsx', '.ts', '.tsx',
+  '.py', '.java', '.go', '.rs',
+  '.c', '.cpp', '.h', '.hpp',
+  '.rb', '.php', '.swift', '.kt',
+  '.sh', '.bash', '.sql',
 ];
 
 // 需要忽略的目录
