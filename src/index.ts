@@ -210,7 +210,9 @@ app.post('/webhook/github', async (c) => {
     /**
      * 7. 生成审查统计
      */
+    console.log(`start check!`);
     const successResults = results.filter((r) => r.success);
+    console.log(`successResults: ${JSON.stringify(successResults)} `)
     const totalIssues = successResults.reduce(
       (sum: number, r: any) => sum + (r.metrics?.staticIssues || 0),
       0,
@@ -224,10 +226,11 @@ app.post('/webhook/github', async (c) => {
     const criticalFiles = successResults
       .filter((r: any) => r.metrics?.staticErrors > 0)
       .map((r: any) => ({ fileName: r.fileName, errors: r.metrics.staticErrors }));
-
+    console.log(`check end! totalErrors: ${totalErrors}; totalIssues: ${totalIssues}.`);
     /**
      * 8. 生成 Markdown 格式的审查报告
      */
+    console.log(`start check report!`);
     const reportMarkdown = generateReportMarkdown({
       repository: `${owner}/${repo}`,
       branch,
@@ -238,10 +241,11 @@ app.post('/webhook/github', async (c) => {
       criticalFiles,
       results: successResults,
     });
-
+    console.log(`check report end!`);
     /**
      * 9. 通过 GitHub API 创建 Issue 或 PR 评论
      */
+    console.log(`start issue! eveent: ${eventType}`);
     if (eventType === 'push') {
       // Push 事件：创建 Issue（如果有问题）
       if (totalIssues > 0) {
