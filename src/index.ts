@@ -410,9 +410,11 @@ async function createGitHubIssue(params: {
   const response = await fetch(`https://api.github.com/repos/${owner}/${repo}/issues`, {
     method: 'POST',
     headers: {
-      Authorization: `token ${githubToken}`,
-      Accept: 'application/vnd.github.v3+json',
-      'Content-Type': 'application/json',
+      'Authorization': `token ${githubToken}`,
+      'Accept': 'application/vnd.github+json',
+      'X-GitHub-Api-Version': '2022-11-28',
+      'Host': 'api.github.com',
+      'User-Agent': 'ai-codereview'
     },
     body: JSON.stringify({
       title,
@@ -446,9 +448,11 @@ async function createPullRequestComment(params: {
     {
       method: 'POST',
       headers: {
-        Authorization: `token ${githubToken}`,
-        Accept: 'application/vnd.github.v3+json',
-        'Content-Type': 'application/json',
+        'Authorization': `token ${githubToken}`,
+        'Accept': 'application/vnd.github+json',
+        'X-GitHub-Api-Version': '2022-11-28',
+        'Host': 'api.github.com',
+        'User-Agent': 'ai-codereview'
       },
       body: JSON.stringify({ body }),
     },
