@@ -357,10 +357,9 @@ function generateReportMarkdown(data: {
   if (totalIssues > 0) {
     report += `## 📋 详细问题列表\n\n`;
 
-    // 只显示前 10 个文件的详细报告（避免 Issue 过长）
+    // 显示所有问题文件的详细报告
     const topFiles = results
-      .filter((r: any) => r.metrics?.staticIssues > 0)
-      .slice(0, 10);
+      .filter((r: any) => r.metrics?.staticIssues > 0);
 
     topFiles.forEach((r: any) => {
       report += `### ${r.fileName}\n\n`;
@@ -372,23 +371,17 @@ function generateReportMarkdown(data: {
           const emoji = issue.severity === 'error' ? '🔴' : issue.severity === 'warning' ? '🟡' : 'ℹ️';
           report += `${emoji} **Line ${issue.line}**: ${issue.message} (\`${issue.rule}\`)\n`;
         });
-        if (r.staticResult.issues.length > 5) {
-          report += `\n_... 还有 ${r.staticResult.issues.length - 5} 个问题_\n`;
-        }
       }
       report += `\n`;
     });
 
-    if (results.filter((r: any) => r.metrics?.staticIssues > 0).length > 10) {
-      report += `\n_... 还有 ${results.filter((r: any) => r.metrics?.staticIssues > 0).length - 10} 个文件包含问题_\n\n`;
-    }
   } else {
     report += `## ✅ 太棒了！\n\n`;
     report += `没有发现任何问题，代码质量良好！\n\n`;
   }
 
   report += `---\n\n`;
-  report += `🤖 _此报告由 [Mastra AI 代码审查系统](https://github.com/mastra) 自动生成_\n`;
+  report += `🤖 _此报告由 [AI-CODEREVIEW 代码审查系统](https://github.com/ockerm698-coder/mastra-workflow-codereview) 自动生成_\n`;
 
   return report;
 }
