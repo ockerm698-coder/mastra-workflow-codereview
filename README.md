@@ -1,7 +1,4 @@
 # Mastra GitHub 自动代码审查系统
-# TODO：
-  #### 1.由于github webhook超过10s未响应2XX，就会请求超时。需要设置队列来移步处理解决这个问题，以便服务器可以立即响应，然后异步处理请求。
-  #### 2.用公司规范库来进行代码静态检查，使用RAG 
 
 > 基于 **Mastra + OpenAI + Cloudflare Workers** 的智能代码审查系统
 >
@@ -10,6 +7,10 @@
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![Cloudflare Workers](https://img.shields.io/badge/Cloudflare-Workers-orange)](https://workers.cloudflare.com/)
 [![OpenAI](https://img.shields.io/badge/OpenAI-GPT--4o--mini-green)](https://openai.com/)
+
+## TODO：
+  ### 1.由于github webhook超过10s未响应2XX，就会请求超时。需要设置队列来移步处理解决这个问题，以便服务器可以立即响应，然后异步处理请求。
+  ### 2.用公司规范库来进行代码静态检查，使用RAG 
 
 ## 🌟 核心特性
 
