@@ -1,6 +1,3 @@
-// 首先加载 polyfills（必须在 Mastra 之前）
-import '../polyfills';
-
 // 导入 Mastra 核心类
 import { Mastra } from '@mastra/core/mastra';
 // 导入代码审查工作流

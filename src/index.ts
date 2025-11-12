@@ -165,12 +165,34 @@ app.post('/webhook/github', async (c) => {
     const results = await Promise.all(
       scanResult.files.map(async (file) => {
         try {
-          const result = await workflow.execute({
-            code: file.content,
-            fileName: file.path,
+          // 直接使用 workflow.start() 而不是 .execute()，避免 addEventListener 问题
+          // 参考：https://github.com/mastra-ai/mastra/issues/7588
+          const result = await (workflow as any).start({
+            inputData: {
+              code: file.content,
+              fileName: file.path,
+            },
           });
-          console.log(`${file.path} result: ${JSON.stringify(result)}`);
-          return { success: true, ...result };
+          console.log(`${file.path} result status: ${result.status}`);
+
+          // 根据 status 判断是否成功
+          if (result.status === 'success') {
+            // @ts-ignore - result 字段在 success 状态下存在
+            const output = result.result;
+            console.log(`${file.path} output: ${JSON.stringify(output)}`);
+            return {
+              success: true,
+              fileName: file.path,
+              ...output,
+            };
+          } else {
+            // 失败状态
+            return {
+              success: false,
+              fileName: file.path,
+              error: result.status === 'failed' ? result.error?.message : 'Workflow execution failed',
+            };
+          }
         } catch (error: any) {
           console.error(`❌ Failed to review ${file.path}:`, error.message);
           console.error('Error details:', error);
