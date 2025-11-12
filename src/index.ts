@@ -167,7 +167,9 @@ app.post('/webhook/github', async (c) => {
         try {
           // 直接使用 workflow.start() 而不是 .execute()，避免 addEventListener 问题
           // 参考：https://github.com/mastra-ai/mastra/issues/7588
-          const result = await (workflow as any).start({
+          // https://mastra.ai/docs/workflows/overview 的Running workflows章节
+          const run = await workflow.createRunAsync();
+          const result = await run.start({
             inputData: {
               code: file.content,
               fileName: file.path,
