@@ -21,6 +21,9 @@
  * 5. 通过 GitHub API 创建 Issue 或 PR 评论
  */
 
+// 首先加载 Cloudflare Workers 环境的 polyfills
+import './polyfills';
+
 import { Hono } from 'hono';
 import { cors } from 'hono/cors';
 import { mastra } from './mastra';

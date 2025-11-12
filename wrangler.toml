@@ -1,8 +1,7 @@
 name = "ai-codereview"
 main = "src/index.ts"
 compatibility_date = "2025-07-18"
-compatibility_flags = ["nodejs_compat", "streams_enable_constructors"]
-node_compat = true
+compatibility_flags = ["nodejs_compat"]
 
 # 环境变量通过 wrangler secret 设置
 # wrangler secret put OPENAI_API_KEY
